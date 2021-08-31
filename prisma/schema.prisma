@@ -1,0 +1,57 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:../sqlite.db"
+}
+
+model User {
+  userId       Int        @id @default(autoincrement())
+  tId          Int        @unique
+  isBot        Boolean?
+  firstName    String?
+  lastName     String?
+  userName     String
+  languageCode String?
+  token        String     @unique
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  categories   Category[]
+  Post         Post[]
+}
+
+model Category {
+  categoryId  Int      @id @default(autoincrement())
+  name        String   @unique
+  description String?
+  userId      Int
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  randomDelay Int      @default(0)
+  User        User     @relation(fields: [userId], references: [userId])
+  posts       Post[]
+  Random      Random[]
+}
+
+model Post {
+  postId     Int       @id @default(autoincrement())
+  text       String?
+  image      String?
+  categoryId Int?
+  userId     Int?
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  Category   Category? @relation(fields: [categoryId], references: [categoryId])
+  User       User?     @relation(fields: [userId], references: [userId])
+}
+
+model Random {
+  id         Int      @id @default(autoincrement())
+  categoryId Int
+  chatId     Int
+  lastCallAt DateTime @default(now())
+  postId     Int
+  Category   Category @relation(fields: [categoryId], references: [categoryId])
+}
