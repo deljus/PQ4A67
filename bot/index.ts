@@ -13,12 +13,32 @@ if (!token) {
 
 const bot = new TelegramBot(token, { polling: true })
 
-bot.onText(/\/startpq/, async ({ chat }) => {
+bot.onText(/\/start/, async ({ chat }) => {
   return bot.sendMessage(
     chat.id,
-    '<b>Привет!</b> <i>Это бот PQ4A67</i> <i>Для того чтобы редактировать меня напишите мне в личку команду /token </i><b>Далее зайдите на <a href="http://137.184.47.198/">сайт</a> и авторизуйтесь! </b>',
+    "<b>Привет!</b> " +
+      "<i>Это бот PQ4A67</i> " +
+      "<i>Для того чтобы редактировать меня напишите мне в личку команду /token </i>" +
+      '<b>Далее зайдите на <a href="http://137.184.47.198/">сайт</a> и авторизуйтесь! </b>',
     { parse_mode: "HTML" }
   )
+})
+
+bot.onText(/\/ls/, async ({ chat }) => {
+  const category = await prisma.category.findMany({
+    select: {
+      name: true,
+      description: true,
+    },
+    take: 20,
+    skip: 0
+  });
+
+  const html = category
+    .map(({ name, description }) => `<b>${name}</b> - <i>${description}</i>`)
+    .join("\n")
+
+  return bot.sendMessage(chat.id, html, { parse_mode: "HTML" })
 })
 
 bot.onText(/\/token/, async ({ from, chat }) => {

@@ -10,7 +10,7 @@ export function Message({ type, text, onClose }: MessageProps) {
   return (
     <div className="absolute z-50 bottom-0 right-0 w-full max-w-full md:max-w-lg">
       <div
-        className={`flex m-4 rounded-lg border-2 flex-row items-start space-x-4 p-8 ${
+        className={`flex m-4 rounded-lg bg-white border-2 flex-row items-start space-x-4 p-8 ${
           type === TYPES.SUCCESS ? "border-green-500" : "border-red-500"
         }`}
       >

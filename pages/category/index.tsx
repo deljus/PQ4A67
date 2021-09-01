@@ -143,7 +143,7 @@ export default function QuotesPage() {
 
   return (
     <Layout>
-      <div className="container mx-auto py-8">
+      <div className="container px-4 mx-auto py-8">
         <h1 className="mb-8">Категории</h1>
         <div className="grid lg:grid-cols-2 gap-8 mb-16">
           <form
