@@ -35,7 +35,7 @@ bot.onText(/\/ls/, async ({ chat }) => {
   });
 
   const html = category
-    .map(({ name, description }) => `<b>pq${name}</b> - <i>${description}</i>`)
+    .map(({ name, description }) => `<b>/pq${name}</b> - <i>${description}</i>`)
     .join("\n")
 
   return bot.sendMessage(chat.id, html, { parse_mode: "HTML" })
