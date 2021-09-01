@@ -6,9 +6,10 @@ import { SubmitHandler, useForm } from "react-hook-form"
 import { InfiniteData, useInfiniteQuery, useMutation, useQueryClient } from "react-query"
 
 import { Layout } from "@/components/layout"
-import { Link, EmptyBox } from "@/components/lib"
+import { EmptyBox,Link } from "@/components/lib"
 import { Loader } from "@/components/loader"
 import { TYPES } from "@/components/message"
+import { SelectButton } from "@/components/select-button"
 import { SortBar } from "@/components/sort-bar"
 import { useMessage } from "@/context/message"
 import { useUser } from "@/context/user"
@@ -20,7 +21,6 @@ import {
 } from "@/utils/api"
 import { PAGE_ITEMS_COUNT, QUERY_KEYS, RANDOM_DELAY } from "@/utils/const"
 import { useScrollIsBottom } from "@/utils/hooks"
-import { SelectButton } from "@/components/select-button"
 
 const qKeyGen = ({ userName, name, order }: ClientSearchParams, createKey: string) => ({
   userName,
