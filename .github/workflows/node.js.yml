@@ -27,13 +27,8 @@ jobs:
           source: "."
           target: "/opt/app"
 
-      - name: Executing remote  command
-        uses: appleboy/ssh-action@master
+      - uses: actions/setup-node@v2
         with:
-          HOST: ${{ secrets.SSH_HOST }}
-          USERNAME: ${{ secrets.SSH_USERNAME }}
-          KEY: ${{ secrets.SSH_KEY }}
-          script: |
-            cd /opt/app
-            npm install
-            npm run
+          node-version: '14'
+          cache: 'npm'
+        - run: npm install
