@@ -7,3 +7,4 @@ sqlite.db
 sqlite.db-journal
 .next
 .idea
+deploy.sh
