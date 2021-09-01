@@ -33,5 +33,6 @@ jobs:
           HOST: ${{ secrets.SSH_HOST }}
           USERNAME: ${{ secrets.SSH_USERNAME }}
           KEY: ${{ secrets.SSH_KEY }}
-          script: npm install
-                  node -v
+          script: |
+            npm install
+            node -v
