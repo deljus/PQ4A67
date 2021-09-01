@@ -22,6 +22,7 @@ jobs:
 
           script: |
             killall node
+            nvm use 14
             node -v
             cd ~/progects/PQ4A67
             git pull
