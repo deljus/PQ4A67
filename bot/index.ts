@@ -13,6 +13,14 @@ if (!token) {
 
 const bot = new TelegramBot(token, { polling: true })
 
+bot.onText(/\/pq/, async ({ chat }) => {
+  return bot.sendMessage(
+    chat.id,
+    '<b>Привет!</b><br/><p>Это бот PQ4A67</p><p>Для того чтобы редактировать меня напишите мне в личку команду /token</p><p>Далее зайдите на <a href="http://137.184.47.198/">сайт</a> и авторизуйтесь! </p>',
+    { parse_mode: "HTML" }
+  )
+})
+
 bot.onText(/\/token/, async ({ from, chat }) => {
   if (from?.id !== chat.id) {
     return bot.sendMessage(chat.id, "Пожалуйста напиши мне в личку и я выдам токен!")
