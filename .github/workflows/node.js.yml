@@ -10,25 +10,17 @@ on:
     branches: [ master ]
 
 jobs:
-  build:
-
+  deploy:
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v1
-
-      - name: Copy file via scp
-        uses: appleboy/scp-action@master
-        env:
-          HOST: ${{ secrets.SSH_HOST }}
-          USERNAME: ${{ secrets.SSH_USERNAME }}
-          KEY: ${{ secrets.SSH_KEY }}
+      - name: Deploy NodeJS app
+        uses: appleboy/ssh-action@v0.1.4
         with:
-          source: "."
-          target: "/opt/app"
+          host: ${{ secrets.SSH_HOST }}
+          key: ${{ secrets.SSH_KEY }}
+          username: ${{ secrets.SSH_USERNAME }}
 
-      - uses: actions/setup-node@v2
-        with:
-          node-version: '14'
-          cache: 'npm'
-        - run: npm install
+          script: |
+            killall node
+            cd ~/progects/PQ4A67
+            git pull
