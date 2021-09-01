@@ -22,5 +22,5 @@ jobs:
 
           script: |
             killall node
-            cd ~/progects/PQ4A67
+            cd /opt/projects/PQ4A67
             git pull
