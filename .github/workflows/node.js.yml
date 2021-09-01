@@ -26,6 +26,7 @@ jobs:
             cd ~/progects/PQ4A67
             git pull
             npm install
+            npm run generate
             npm run pull
             npm run build
             npm run serve
