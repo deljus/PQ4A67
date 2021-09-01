@@ -24,4 +24,8 @@ jobs:
             killall node
             cd ~/progects/PQ4A67
             git pull
+            npm install
+            npm run pull
+            npm run build
+            npm run serve
             echo 'Deployment successful to digital ocean'
