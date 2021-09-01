@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [ 12.x, 14.x, 16.x ]
+        node-version: [ 14.x ]
     steps:
       - name: Deploy NodeJS app
         uses: appleboy/ssh-action@v0.1.4
@@ -25,12 +25,7 @@ jobs:
 
           script: |
             killall node
-            node -v
             cd ~/progects/PQ4A67
             git pull
-            npm install
-            npm run generate
-            npm run pull
-            npm run build
-            npm run serve
+            ./deploy.sh
             echo 'Miiii Deployment successful to digital ocean'
