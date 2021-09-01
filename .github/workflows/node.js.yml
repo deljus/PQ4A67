@@ -33,4 +33,5 @@ jobs:
           HOST: ${{ secrets.SSH_HOST }}
           USERNAME: ${{ secrets.SSH_USERNAME }}
           KEY: ${{ secrets.SSH_KEY }}
-          script: cat /opt/app/README.md
+          script: npm install
+                  node -v
