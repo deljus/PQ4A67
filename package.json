@@ -3,14 +3,15 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "next start",
+    "start": "next start",
     "dev": "next dev",
     "build": "next build",
     "start-bot": "ts-node --project tsconfig.server.json bot",
     "generate": "prisma generate",
     "migrate": "prisma migrate dev",
     "pull": "prisma db pull",
-    "studio": "prisma studio"
+    "studio": "prisma studio",
+    "serve": "concurrently --kill-others \"npm run start\" \"npm run start-bot\""
   },
   "dependencies": {
     "@headlessui/react": "^1.4.0",
