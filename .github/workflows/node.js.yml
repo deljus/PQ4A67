@@ -34,5 +34,6 @@ jobs:
           USERNAME: ${{ secrets.SSH_USERNAME }}
           KEY: ${{ secrets.SSH_KEY }}
           script: |
+            cd /opt/app
             npm install
-            node -v
+            npm run
