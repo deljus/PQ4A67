@@ -1,5 +1,5 @@
 #!/bin/bash
-
+node -v
 npm install
 npm run generate
 npm run pull
