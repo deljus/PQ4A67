@@ -153,7 +153,7 @@ export default function PostsPage() {
             <small className="text-gray-600">Создать новую запись:</small>
             <label className="block relative w-full">
               <div className="flex flex-row justify-center items-center space-x-4">
-                <input type="text" {...register("image")} placeholder="Ссылка на изображение" />
+                <input type="text" {...register("image")} placeholder="Ссылка на изображение" disabled />
                 <input type="text" {...register("text")} placeholder="текст" />
                 <button type="submit" className="mt-1">
                   Создать

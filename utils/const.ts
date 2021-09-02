@@ -32,3 +32,7 @@ export const RANDOM_DELAY = [
   { id: 3, name: "3 Дня", value: 3 },
   { id: 4, name: "7 Дней", value: 7 },
 ];
+
+export const RESTRICTIONS = {
+  CATEGORY_CREATE_COUNT: 5
+} as const;

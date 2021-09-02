@@ -3,7 +3,7 @@ import connect from "next-connect"
 import * as yup from "yup"
 
 import { prisma } from "@/db"
-import { SERVER_STATUS } from "@/utils/const"
+import { SERVER_STATUS, RESTRICTIONS } from "@/utils/const"
 import { authMiddleware, NextApiRequestAuth, validate } from "@/utils/server"
 
 const putSchema = yup.object().shape({
@@ -17,35 +17,49 @@ const delValidate = yup.object().shape({
 export default connect<NextApiRequestAuth, NextApiResponse>()
   .use(authMiddleware)
   .get(async (req, res) => {
-    const {userName, order, name, skip, take} = req.query as ServerSearchParams;
+    const { userName, order, name, skip, take } = req.query as ServerSearchParams
     const categories = await prisma.category.findMany({
       skip: Number(skip),
       take: Number(take),
       where: {
         name: {
-          contains: name
+          contains: name,
         },
         User: {
           userName: {
-            contains: userName
-          }
-        }
+            contains: userName,
+          },
+        },
       },
       include: {
         User: {
           select: {
-            userName: true
-          }
+            userName: true,
+          },
         },
       },
       orderBy: {
-        createdAt: order
-      }
+        createdAt: order,
+      },
     })
     return res.json(categories)
   })
   .put(validate({ body: putSchema }), async (req, res) => {
     try {
+      const userCategoryCount = await prisma.category.count({
+        where: {
+          userId: req.user.userId,
+        },
+      })
+
+      if (userCategoryCount >= RESTRICTIONS.CATEGORY_CREATE_COUNT) {
+        return res
+          .status(SERVER_STATUS.BAD_REQUEST)
+          .json({
+            message: `Вы привысили ограничения в ${RESTRICTIONS.CATEGORY_CREATE_COUNT} записей.`,
+          })
+      }
+
       const category = await prisma.category.create({
         data: {
           name: req.body.name,
@@ -69,4 +83,4 @@ export default connect<NextApiRequestAuth, NextApiResponse>()
     })
 
     return res.json(category)
-  });
+  })
