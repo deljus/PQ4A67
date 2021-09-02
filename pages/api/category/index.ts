@@ -3,7 +3,7 @@ import connect from "next-connect"
 import * as yup from "yup"
 
 import { prisma } from "@/db"
-import { SERVER_STATUS, RESTRICTIONS } from "@/utils/const"
+import { RESTRICTIONS,SERVER_STATUS } from "@/utils/const"
 import { authMiddleware, NextApiRequestAuth, validate } from "@/utils/server"
 
 const putSchema = yup.object().shape({
